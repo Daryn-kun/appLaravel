@@ -1,20 +1,18 @@
-@extends('master')
+@extends('layouts.master')
 
-@section('title', 'Все категории')
+@section('title', __('main.categories'))
 
 @section('content')
-    <div class="starter-template">
         @foreach($categories as $category)
             <div class="panel">
-                <a href="/{{$category->code}}">
-                    <img src="http://internet-shop.tmweb.ru/storage/categories/mobile.jpg">
-                    <h2>{{$category->name}}</h2>
+                <a href="{{route('category', $category->code)}}">
+                    <img src="{{Storage::url($category->image)}}">
+                    <h2>{{$category->__('name')}}</h2>
                 </a>
                 <p>
-                    {{$category->description}}
+                    {{$category->__('description')}}
                 </p>
             </div>
             @endforeach
-    </div>
 @endsection
 

@@ -1,12 +1,29 @@
-body {
-    padding-top: 40px;
-}
+/*body {*/
+/*    padding-top: 40px;*/
+/*}*/
 
 .starter-template {
-    padding: 20px 15px;
+    padding: 0px 15px;
     text-align: center;
 }
-
+.shadow {
+    color: black;
+    font: normal 45px Verdana;
+    text-shadow: 1px 1px darkgrey,
+    2px 2px darkgrey,
+    3px 3px darkgrey;
+}
+.shadow:hover {
+    position: relative;
+    top: -3px;
+    left: -3px;
+    text-shadow: 1px 1px darkgrey,
+    2px 2px darkgrey,
+    3px 3px darkgrey,
+    4px 4px darkgrey,
+    5px 5px darkgrey,
+    6px 6px darkgrey;
+}
 table {
     text-align: left;
 }
@@ -44,4 +61,11 @@ span.badge.badge-danger {
 
 div.filters {
     padding-bottom: 5px;
+}
+
+footer {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: #99979c;
+    background-color: #2a2730;
 }

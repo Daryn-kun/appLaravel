@@ -1,17 +1,17 @@
-@extends('master')
+@extends('layouts.master')
 
-@section('title', 'Категория' . $category->name)
+@section('title', $category->__('name'))
 @section('content')
-    <div class="starter-template">
-        <h1>
-            {{ $category->name}}
-        </h1>
-        <p>
-            {{$category->description}}
-        </p>
-        <div class="row">
-            @include('card')
-        </div>
+    <h1>
+        {{ $category->__('name')}}
+    </h1>
+    <p>
+        {{$category->__('description')}}
+    </p>
+    <div class="row">
+        @foreach($category->products as $product)
+            @include('layouts.card', compact('product'))
+        @endforeach
     </div>
 @endsection
 

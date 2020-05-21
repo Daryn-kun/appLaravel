@@ -1,57 +1,46 @@
-@extends('master')
+@extends('layouts.master')
 
-@section('title', 'Главная')
+@section('title', __('main.main_page'))
 
 @section('content')
-    <div class="starter-template">
-        <h1>Все товары</h1>
-        <form method="GET" action="http://internet-shop.tmweb.ru">
+    @include('layouts.slider');
+
+    <h1>@lang('main.all_products')</h1>
+        <form method="GET" action="{{route('index')}}">
             <div class="filters row">
+                @include('auth.layouts.error', ['fieldName' => 'price_from'])
+                @include('auth.layouts.error', ['fieldName' => 'price_to'])
                 <div class="col-sm-6 col-md-3">
-                    <label for="price_from">Цена от<input type="text" name="price_from" id="price_from" size="6"
-                                                          value="">
+                    <label for="price_from">@lang('main.price_from') <input type="text" name="price_from" id="price_from" size="6"
+                                                          value="{{request()->price_from}}" style="height: 20px">
                     </label>
-                    <label for="price_to">до<input type="text" name="price_to" id="price_to" size="6" value="">
+                    <label for="price_to"> @lang('main.price_to') <input type="text" name="price_to" id="price_to" size="6" value="{{request()->price_to}}" style="height: 20px">
                     </label>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <label for="hit">
-                        <input type="checkbox" name="hit" id="hit"> Хит </label>
+                        <input type="checkbox" name="hit" id="hit" @if(request()->has('hit')) checked @endif> @lang('main.properties.hit') </label>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <label for="new">
-                        <input type="checkbox" name="new" id="new"> Новинка </label>
+                        <input type="checkbox" name="new" id="new" @if(request()->has('new')) checked @endif> @lang('main.properties.new') </label>
                 </div>
                 <div class="col-sm-2 col-md-2">
                     <label for="recommend">
-                        <input type="checkbox" name="recommend" id="recommend"> Рекомендуем </label>
+                        <input type="checkbox" name="rec" id="rec" @if(request()->has('rec')) checked @endif> @lang('main.properties.rec') </label>
                 </div>
                 <div class="col-sm-6 col-md-3">
-                    <button type="submit" class="btn btn-primary">Фильтр</button>
-                    <a href="http://internet-shop.tmweb.ru" class="btn btn-warning">Сброс</a>
+                    <button type="submit" class="btn btn-primary">@lang('main.filter')</button>
+                    <a href="{{route('index')}}" class="btn btn-warning">@lang('main.reset')</a>
                 </div>
             </div>
         </form>
         <div class="row">
-            @include('card')
+            @foreach($products as $product)
+                @include('layouts.card', compact('product'))
+            @endforeach
         </div>
-        <nav>
-            <ul class="pagination">
-
-                <li class="page-item disabled" aria-disabled="true" aria-label="pagination.previous">
-                    <span class="page-link" aria-hidden="true">&lsaquo;</span>
-                </li>
+        {{$products->links()}}
 
 
-                <li class="page-item active" aria-current="page"><span class="page-link">1</span></li>
-                <li class="page-item"><a class="page-link" href="?&amp;page=2">2</a></li>
-
-
-                <li class="page-item">
-                    <a class="page-link" href="?&amp;page=2" rel="next" aria-label="pagination.next">&rsaquo;</a>
-                </li>
-            </ul>
-        </nav>
-
-    </div>
 @endsection
